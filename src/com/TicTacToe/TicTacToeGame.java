@@ -145,7 +145,7 @@ public class TicTacToeGame {
 	    		computerFirstTurn();
 	    	}
 	    } else {
-	    	System.out.println("\nInvalid input Again");
+	    	System.out.println("\nInvalid input ");
 	    	tossCoin();
 	    }
 	}
