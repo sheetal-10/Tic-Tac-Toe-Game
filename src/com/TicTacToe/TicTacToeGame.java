@@ -8,9 +8,9 @@ import java.util.Scanner;
  * @since 2021-08-10
  */
 public class TicTacToeGame {
-	
-	static char[] board = new char[10];
+	//variables
 	static char userMark, computerMark;
+	private static char[] element;
 	
 	public static void main(String[] args) {
 		//displaying welcome message
@@ -19,6 +19,8 @@ public class TicTacToeGame {
 		createBoard();
 		//for user to choose 'X' or 'O' mark
 		choosingXorO();
+		//for display the board
+		currentBoard();
 	}
 	
 	/**
@@ -26,8 +28,9 @@ public class TicTacToeGame {
 	 * 0th index is ignored
 	 */
 	private static void createBoard() {
+		element = new char[10];
 		for (int i = 1; i < 10; i++) {
-			board[i] = ' ';
+			element[i] = ' ';
 		}
 	}
 	
@@ -50,7 +53,32 @@ public class TicTacToeGame {
 			default:
 					System.out.println("Your input is invalid");
 					choosingXorO();
+			}
+	}
+	
+	/**
+	 * Displays board layout
+	 * Elements are assigned with marks and numbers
+	 */
+	private static void displayingBoard() {
+		System.out.println("\n  "+element[1]+" | "+element[2]+" | "+element[3]+" ");
+		System.out.println(" ----------- ");
+		System.out.println("  "+element[4]+" | "+element[5]+" | "+element[6]+" ");
+		System.out.println(" ----------- ");
+		System.out.println("  "+element[7]+" | "+element[8]+" | "+element[9]+" \n");
+	}
+	
+	/**
+	 * Assigning elements with numbers if it is not marked
+	 * @param element[]
+	 */
+	private static void currentBoard() {
+		for (int i=1;i<10;i++) {
+			if (element[i] !='X'&&element[i] !='O') {
+				element[i]=(char) (i+'0');
+			}
 		}
+	    displayingBoard();
 	}
 }
 
