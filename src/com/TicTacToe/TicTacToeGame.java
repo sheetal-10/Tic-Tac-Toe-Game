@@ -7,21 +7,23 @@ package com.TicTacToe;
  */
 public class TicTacToeGame {
 	
+	static char[] board = new char[10];
+	
 	public static void main(String[] args) {
 		//displaying welcome message
 		System.out.println("Welcome to Tic Tac Toe Game");
 		//calling method to initialise the board
-		boardLayout();
+		createBoard();
 	}
 	
 	/**
 	 * Creating method for empty board
 	 * 0th index is ignored
 	 */
-	private static void boardLayout() {
-		char[] empty_board = new char[10];
+	private static void createBoard() {
+		
 		for (int i = 1; i < 10; i++) {
-			empty_board[i] = ' ';
+			board[i] = ' ';
 		}
 	}
 }
