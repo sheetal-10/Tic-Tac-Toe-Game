@@ -9,23 +9,32 @@ import java.util.Scanner;
  */
 public class TicTacToeGame {
 	//variables
-	static char userMark, computerMark;
-	private static char[] element;
-	static int userNumber;
+		private static char[] element;
+		static char userMark, computerMark;
+		static int userNumber, computerNumber;
+		static int turn = 1, flag = 0;
 	
 	public static void main(String[] args) {
-		//displaying welcome message
-		System.out.println("Welcome to Tic Tac Toe Game");
-		//calling method to initialise the board
+		//for creating empty elements
 		createBoard();
+		//to display the game layout
+		displayingBoard();
 		//for user to choose 'X' or 'O' mark
 		choosingXorO();
-		//for display the board
-		currentBoard();
-		//for calling the user for number
-		userCall();
-		//for making the mark on user number
-		userMove();
+		// For making toss to check who plays first
+		tossCoin();
+		// to to play the game until some one wins i.e. flag=1
+		while(flag==0) {
+				if((turn+1)%2==0) {
+						//for display the current board
+						currentBoard();
+						//for calling the user for number
+						userCall();
+						//for making the mark on user number
+						userMove();
+						turn++;
+					}
+				}
 	}
 	
 	/**
@@ -45,20 +54,20 @@ public class TicTacToeGame {
 	 * @return userMark, computerMark
 	 */
 	private static void choosingXorO() {
-		Scanner s = new Scanner(System.in);
-		System.out.println("Choose 1 for 'X' or Choose 2 for 'O' as your mark");		
-		int option = s.nextInt();
+		System.out.println("Choose 1 for 'X' or Choose 2 for 'O' as your mark");
+		int option = Utility.getUserInteger();
 		switch (option) {
-			case 1: userMark = 'X';
-					computerMark = 'O';
-					break;
-			case 2: userMark = 'O';
-					computerMark = 'X';
-					break;
-			default:
-					System.out.println("Your input is invalid");
-					choosingXorO();
-			}
+		case 1: userMark = 'X';
+				computerMark = 'O';
+						break;
+		case 2: userMark = 'O';
+			computerMark = 'X';
+			break;
+		default:
+			System.out.println("Your input is invalid");
+			choosingXorO();
+		}
+		System.out.println("\nUser Mark: '"+userMark+"' and Computer Mark: '"+computerMark+"'");
 	}
 	
 	/**
@@ -91,15 +100,15 @@ public class TicTacToeGame {
 	 * @param userNumber
 	 */
 	private static void userCall() {
-		Scanner s = new Scanner(System.in);
 	    System.out.println("\nEnter a number from board to make the mark:\n");
-	    userNumber = s.nextInt();
+	    userNumber = Utility.getUserInteger();
 	    if (userNumber < 1 || userNumber > 9) {
 	    	currentBoard();
 	    	System.out.println("Your input is Invalid");
 	    	userCall();
 	    }
 	}
+	
 	/**
 	 * Checking whether the user number is free or not 
 	 * If user number is available, making the move
@@ -113,6 +122,42 @@ public class TicTacToeGame {
 		} else {
 			element[userNumber]=userMark;
 		}
+	}
+	
+	/**
+	 * Determining who's is starting, user or computer by tossing a coin
+	 * @param Head and Tail
+	 */
+	private static void tossCoin() {   
+	    System.out.println("\nMaking a toss to check who plays first\nChoose 1 for Head or 2 for Tail");
+	    int option = Utility.getUserInteger();;
+	    if ( option==1 || option==2 ) {
+	    	int flip = Utility.getRandomInt(2)+1;
+	    	if (flip==1) {
+	    		System.out.println("\nBy tossing Coin it shows HEAD\n");
+	    	} else {
+	    		System.out.println("\nBy tossing Coin it shows TAIL\n");
+	    	}
+	    	if (flip == option) {
+	    		System.out.println("User will start the game\n");
+	    	} else {
+	    		System.out.println("Computer will start the game\n");
+	    		computerFirstTurn();
+	    	}
+	    } else {
+	    	System.out.println("\nInvalid input Again");
+	    	tossCoin();
+	    }
+	}
+	
+	/**
+	 * Making Computer First Turn as random from 1 to 9 and makes the mark
+	 * @param compuerNumber
+	 */
+	public static void computerFirstTurn() {
+		computerNumber = Utility.getRandomInt(9)+1;
+		element[computerNumber]=computerMark;
+		System.out.println("Computer choses '"+computerNumber+"' now user turn");
 	}
 }
 
