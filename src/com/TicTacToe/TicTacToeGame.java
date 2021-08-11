@@ -77,6 +77,8 @@ public class TicTacToeGame {
 					}
 				}
 			}
+			//To initiate the game again
+			gameAgain();
 		}
 	
 	/**
@@ -90,7 +92,6 @@ public class TicTacToeGame {
 		}
 	}
 	
-
 	/**
 	 * Asking user to choose X or O
 	 * @param option
@@ -307,6 +308,11 @@ public class TicTacToeGame {
 		return flag;
 	}
 	
+	/**
+	 * making computer option by sequential order in array
+	 * @param array
+	 * @return flag
+	 */
 	private static int computerOption(int[] array) {
 		for(int j=0;j<4;j++) {
 			if(element[array[j]] != 'X' && element[array[j]] != 'O') {
@@ -318,6 +324,20 @@ public class TicTacToeGame {
 		}
 		return flag;
 	}
+	
+	/**
+	 * Asking user to initiate the game or not
+	 */
+	private static void gameAgain() {
+	   System.out.println("\nWanna play again. 1) Restart 2) Exit");
+	   int option=Utility.getUserInteger();
+	   if (option==1) {
+		   String[] args = { };
+		   main(args);
+	    } else {
+	    		System.exit(1);
+	    }
+   }	
 }
 
 
